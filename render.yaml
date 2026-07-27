@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: rc-chassis
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn worker:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    plan: free
+    healthCheckPath: /ping
